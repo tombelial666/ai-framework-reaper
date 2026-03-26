@@ -1,0 +1,12 @@
+---
+description: Decision integrity rules for architecture, scope and uncertain capabilities
+alwaysApply: true
+---
+
+# Decision Integrity
+
+- Always separate `Confirmed`, `Assumption`, `Risk`, `Deferred` and `Open Question` when discussing architecture or implementation direction.
+- Never invent unsupported capabilities.
+- Never present risky ideas as settled design.
+- Never silently mix MVP scope with future scope.
+- When uncertainty affects architecture or scope, document it instead of guessing.

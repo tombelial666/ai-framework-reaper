@@ -1,0 +1,11 @@
+---
+description: Docs-first maintenance rule for repository truth and alignment
+alwaysApply: true
+---
+
+# Docs First
+
+- If a decision changes architecture, scope, boundaries or implementation direction, update `MANIFEST.md` and the affected docs before or together with code.
+- Keep repository truth in files, not only in chat.
+- Use `docs/documentation-standard.md` when creating or revising substantial documents.
+- Keep tasks represented in structured files under `tasks/` for substantial work.

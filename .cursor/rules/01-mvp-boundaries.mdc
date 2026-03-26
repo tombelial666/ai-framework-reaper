@@ -1,0 +1,11 @@
+---
+description: MVP scope boundaries for ingestion and REAPER scaffold work
+alwaysApply: true
+---
+
+# MVP Boundaries
+
+- In MVP, focus on Guitar Pro related structured sources, `MIDI`, `MusicXML`, manual text/tab-like inputs and a controlled screenshot path.
+- Do not expand MVP into audio transcription, audio-first workflows, raw audio parsing, vocal workflow, or claims of full automatic accuracy; raw audio note extraction and audio-assisted verification remain out of scope.
+- Produce editable scaffolds, warnings and review outputs, not final polished arrangements.
+- Prefer explicit limitations and fallback paths over vague statements like "the AI should understand it."

@@ -1,0 +1,12 @@
+---
+description: Core project direction for the REAPER scaffold framework
+alwaysApply: true
+---
+
+# Project Direction
+
+- Read `MANIFEST.md` before making architecture-shaping decisions.
+- Treat the repository as a long-term framework repository, not a throwaway script folder.
+- Keep the project REAPER-first, deterministic-first and human-review-first.
+- Preserve the canonical score model as source-agnostic and REAPER-agnostic.
+- Keep screenshot ingestion secondary and isolated from the structured-core path.
