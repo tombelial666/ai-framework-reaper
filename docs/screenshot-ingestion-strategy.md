@@ -2,9 +2,9 @@
 
 ## Role in MVP
 
-Screenshot/tab image ingestion — это **контролируемый вторичный path**, который нужен, когда structured source отсутствует, но rough structured draft всё ещё полезен.
+Screenshot/tab image ingestion — это **контролируемый вторичный path** для tab-first продукта: нужен, когда structured source отсутствует, но rough structured draft всё ещё полезен.
 
-Он не должен переопределять архитектуру MVP.
+Он не должен переопределять архитектуру MVP и **не** заменяет приоритет Guitar Pro / Songsterr-export / MIDI / других файловых табов.
 
 ## Where It Is Useful
 

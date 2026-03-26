@@ -7,6 +7,6 @@ alwaysApply: true
 
 - Read `MANIFEST.md` before making architecture-shaping decisions.
 - Treat the repository as a long-term framework repository, not a throwaway script folder.
-- Keep the project REAPER-first, deterministic-first and human-review-first.
-- Preserve the canonical score model as source-agnostic and REAPER-agnostic.
+- Keep the project **tab-first** (tabs/notation as product story), REAPER-first, deterministic-first and human-review-first.
+- Preserve the canonical score model as source-agnostic and REAPER-agnostic; treat interchange formats (e.g. MusicXML) as adapters/bridges, not the product headline.
 - Keep screenshot ingestion secondary and isolated from the structured-core path.

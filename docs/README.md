@@ -36,7 +36,7 @@
 
 ## Phase 1 slice
 
-- [phase1-first-slice.md](phase1-first-slice.md) — первый вертикальный срез (MusicXML).
+- [phase1-first-slice.md](phase1-first-slice.md) — первый вертикальный срез: **MusicXML как technical bridge** (продукт — tab-first).
 
 ## ADR
 

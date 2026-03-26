@@ -2,8 +2,8 @@
 
 ## Phase 0 Acceptance
 
-- `README.md` explains purpose, MVP, out-of-scope and repository organization; формулировка проблемы — в `docs/problem-statement.md` (см. ссылки в README).
-- `MANIFEST.md` defines identity, principles, boundaries, phases and alignment rules.
+- `README.md` explains **tab-first** purpose, MVP, **MIDI-oriented REAPER scaffold**, out-of-scope and repository organization; формулировка проблемы — в `docs/problem-statement.md` (см. ссылки в README).
+- `MANIFEST.md` defines identity (tab-first), Mode A/B, **drums → bass → guitar** implementation emphasis, principles, boundaries, phases and alignment rules.
 - Core scope, architecture, canonical model, risks and open questions are captured under `docs/`.
 - ADR set exists for target architecture, REAPER strategy, Guitar Pro strategy, normalization model and screenshot strategy.
 - Cursor memory layers exist as rules, commands and skills.
@@ -15,7 +15,7 @@
 ### Ingestion Validation Tests
 
 - verify source type detection;
-- verify parser routing;
+- verify parser routing for **tab-source adapters** (including bridge formats such as MusicXML);
 - verify validation outcomes for valid and invalid structured inputs.
 
 ### Normalization Tests
@@ -28,11 +28,12 @@
 
 - verify stable track role assignment;
 - verify naming policy;
-- verify deterministic layout planning.
+- verify deterministic layout planning;
+- where instrument-specific milestones exist, align checks with **drums → bass → guitar** proving order.
 
 ### REAPER Scaffold Validation Tests
 
-- verify scaffold contains expected editable structure;
+- verify scaffold contains expected **editable MIDI-oriented** structure (bundles, planned imports, future `.rpp` hooks);
 - verify markers/regions policy where supported;
 - verify source-to-result traceability hooks.
 
@@ -55,7 +56,8 @@
 
 - unresolved fragments are visible;
 - warning summary is readable;
-- user can identify where to refine manually.
+- user can identify where to refine manually;
+- no implied claim that review is optional.
 
 ### Regression Fixtures
 
