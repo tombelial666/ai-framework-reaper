@@ -2,49 +2,59 @@
 
 ## Goal
 
-Довести **Phase 1 slice 1** до устойчивого минимального вертикального пути: **MusicXML (bridge)** → canonical → arrangement → REAPER-oriented **MIDI-oriented** JSON scaffold → review, с тестами на фикстуру и без расширения MVP.
+Закрепить **drums-first** инкремент поверх стабильного slice 1: **MusicXML (bridge)** → canonical (в т.ч. unpitched/GM) → arrangement → REAPER-oriented JSON scaffold → review — без расширения MVP и без смены продуктовой рамки.
 
-## Product truth (top-level)
+## Current implementation reality
 
-- **Продукт:** tab-first ingestion framework для REAPER-oriented **MIDI scaffolds** и поддержки идей (Mode A/B), не «MusicXML-продукт».
-- **Первый slice:** MusicXML — **технический bridge** для детерминированного кода и фикстур; продуктовые приоритеты источников — Guitar Pro, Songsterr-export, MIDI, и т.д. (см. `MANIFEST.md`).
-- **Следующая практическая ценность после стабилизации slice 1:** выстраивать инкременты в логике **drums → bass → guitar** (mapping, роли, фикстуры, acceptance), не подменяя canonical model.
+- Вертикаль `run_slice1_musicxml` в `src/slice1_pipeline.py`: ingest → `musicxml_to_canonical` → `map_canonical_to_arrangement` → `arrangement_to_scaffold_bundle` → `build_review_report`.
+- **Реализовано:** partwise MusicXML, один `score-part` / одна `part`, первый `measure`, `pitch` + `rest`, divisions/time, трек с `track_role`/`instrument_type` (ранее только `unknown`).
+- **Drums-first (этот инкремент):** парсинг `<unpitched>` (`display-step` / `display-octave`), детерминированная мини-таблица **F4→36 (kick), C5→38 (snare)**; неизвестные позиции → **warning**, событие не создаётся; трек с `part-name`/unpitched → `track_role`/`instrument_type` = `drums`; provenance `kind: drum_hit`, `gm_midi`.
+- Scaffold: для `role_hint == drums` — отдельные `import_notes` (GM, channel 10) и hint в arrangement notes.
+
+## Selected drums-first increment (confirmed scope)
+
+| Элемент | Содержание |
+|--------|------------|
+| Фикстура | `fixtures/structured/musicxml/minimal_drums.xml` — один такт 4/4, две четверти unpitched kick + snare |
+| События | Два `note` с `midi_pitch` 36 и 38, `start_position` 0.0 и 1.0 (в кварталях от divisions=1) |
+| Timing | Один measure, последовательные длительности без полифонии/сложных голосов |
+| Warnings | Неподдерживаемая пара step/octave → строка в `normalize` warnings, hit не попадает в canonical |
+| Scaffold | `role_hint: drums`, hints с mapping note + import_notes про GM drums |
+
+## Expected value of this increment
+
+- Доказывает, что pipeline переносит **осмысленную ударную структуру** (GM note numbers + позиции) в canonical и в **редактируемый** REAPER-oriented bundle (импорт MIDI / ручная расстановка по canonical).
+- Сохраняет MusicXML как **bridge**, tab-first narrative — через реалистичный unpitched percussion path.
 
 ## Confirmed Facts
 
-- **Slice 1** зафиксирован: **MusicXML (partwise)** как первый structured input **в реализации**; см. `docs/phase1-first-slice.md`, ADR-006.
-- ADR-003 задаёт **product-приоритет** Guitar Pro и экосистемы табов; порядок **кода** (сначала MusicXML bridge) согласован в ADR-006.
-- Контракты и скелет модулей в `src/domain`, `ingest`, `normalize`, `mapping`, `reaper`, `review`; склейка — `src/slice1_pipeline.py`.
-- Фикстура: `fixtures/structured/musicxml/minimal_chord.xml`; ожидаемые формы: `fixtures/expected/slice1_minimal_*.json`.
-- Тесты: `tests/unit/test_slice1_contracts.py`; план: `tests/unit/test_plan_slice1.md`.
-- Python 3.11+, `pyproject.toml` с editable install и optional dev (pytest).
+- Тесты: `tests/unit/test_slice1_contracts.py` — существующий golden для `minimal_chord.xml` + новый focused test для `minimal_drums.xml`.
+- Ожидаемые JSON: `fixtures/expected/slice1_minimal_drums_*.json`.
+- Python 3.11+, `pyproject.toml` задаёт `pythonpath = ["src"]` для pytest.
 
 ## Assumptions
 
-- Для slice 1 достаточно stdlib XML и подмножества MusicXML; расширение парсера не ломает границы слоёв.
-- Пользователь дорабатывает черновик в REAPER; JSON bundle не заменяет ручную доработку.
+- Для MVP-доказательства достаточно двух фиксированных позиций нотации; расширение таблицы — отдельные инкременты.
+- Пользователь сопоставляет canonical `midi_pitch` с GM drum map в REAPER вручную при необходимости.
 
 ## Risks
 
-- Расширение MusicXML-парсера может раздуть `normalize/musicxml.py` — держать разбиение на функции и при необходимости вынести в подмодули без утечки в `domain`.
-- Пути к файлам на Windows vs POSIX — в pipeline используется `repo_root` для стабильного `uri_or_label` в canonical.
+- Разные экспортёры (MuseScore vs др.) могут давать другие `display-step`/`display-octave` для тех же звуков → потребуются новые пары в таблице + regression fixtures (**Open Question**).
+
+- Дублирование `_infer_track_role` логики при появлении bass/guitar — позже вынести в общий helper (**Deferred**).
 
 ## Deferred / Out of Scope
 
-- Audio, vocal, lyric workflow, screenshot pipeline (`src/vision/`), transcription.
-- Guitar Pro, MIDI, manual tab как **следующие** срезы после стабилизации slice 1 (по продуктовым приоритетам).
-- Полноценный генератор `.rpp` / ReaScript в slice 1.
-- Полное покрытие MusicXML и golden для всех edge cases.
+- Bass/guitar приоритеты после расширения drums coverage.
+- Полифония/несколько voices, chord на ударных, полный GM map.
+- Экспорт нативного `.mid` / `.rpp`, ReaScript.
+- Audio, vocal, screenshot implementation, plugin automation.
 
 ## Open Questions
 
-- Когда подключать второй адаптер (**Guitar Pro vs MIDI**) после slice 1 — в пользу tab-first ценности.
-- Формат первого «native» REAPER артефакта (`.rpp` vs ReaScript vs MIDI import pack) — после готовности canonical + mapping.
-- Какие фикстуры первыми подтверждают **drums → bass → guitar** в mapping (отдельные треки vs обобщённые роли).
+- Нужен ли отдельный explicit `drum` event type в domain vs текущий `note` + provenance (**Deferred** до обсуждения модели).
+- Когда добавлять второй адаптер (MIDI/Guitar Pro) относительно расширения drum map.
 
 ## Next Decision
 
-После зелёных тестов slice 1 выбрать инкремент, согласованный с **drums-first** roadmap:
-
-- **(A)** расширить MusicXML bridge (мультипарт / несколько тактов) с явным упором на роли **drums/bass/guitar** в mapping; **или**
-- **(B)** добавить второй адаптер (например MIDI или Guitar Pro) по тем же контрактам, с сохранением tab-first позиционирования.
+Выбрать следующий малый шаг: **(A)** расширить `_UNPITCHED_GM_DRUM` + фикстуру (hi-hat, tom) с теми же правилами warnings; **или** **(B)** вынести drum mapping в отдельный модуль `normalize/musicxml_drums.py` при первом признаке раздувания `musicxml.py`.

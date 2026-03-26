@@ -44,6 +44,21 @@ def _pitch_to_midi(step: str, octave: int, alter: int = 0) -> int:
     return (octave + 1) * 12 + base + alter
 
 
+# Minimal GM drum map: MusicXML display-step/display-octave (percussion staff) → General MIDI note.
+# Scope intentionally tiny for deterministic slice; unknown pairs → warning + omitted event.
+_UNPITCHED_GM_DRUM: dict[tuple[str, int], int] = {
+    ("F", 4): 36,  # bass / kick (common notation)
+    ("C", 5): 38,  # snare (common notation)
+}
+
+
+def _infer_track_role(part_name: str, saw_unpitched: bool) -> tuple[str, str]:
+    name_l = part_name.lower()
+    if saw_unpitched or "drum" in name_l:
+        return "drums", "drums"
+    return "unknown", "unknown"
+
+
 def musicxml_to_canonical(
     ingest: MusicXmlIngestResult,
     *,
@@ -111,6 +126,7 @@ def musicxml_to_canonical(
     measure_id = f"m-{measure_num}"
 
     events: list[NoteEvent] = []
+    saw_unpitched = False
     cursor = 0.0
     for child in measure_el:
         tag = _local(child.tag)
@@ -119,6 +135,7 @@ def musicxml_to_canonical(
             duration_raw = int(dur_el.text.strip()) if dur_el is not None and dur_el.text else 0
             duration_q = float(duration_raw) / float(divisions)
             rest_el = next((c for c in child if _local(c.tag) == "rest"), None)
+            unpitched_el = next((c for c in child if _local(c.tag) == "unpitched"), None)
             if rest_el is not None:
                 eid = f"evt-rest-{measure_num}-{cursor}"
                 events.append(
@@ -133,6 +150,41 @@ def musicxml_to_canonical(
                         provenance={"source": "musicxml", "measure": str(measure_num)},
                     )
                 )
+            elif unpitched_el is not None:
+                saw_unpitched = True
+                ds = next((c for c in unpitched_el if _local(c.tag) == "display-step"), None)
+                do = next((c for c in unpitched_el if _local(c.tag) == "display-octave"), None)
+                step_u = (ds.text or "C").strip() if ds is not None and ds.text else "C"
+                oct_u = int(do.text.strip()) if do is not None and do.text else 4
+                # Normalize step to single letter for lookup (MusicXML uses A–G)
+                step_key = step_u[0].upper() if step_u else "C"
+                gm = _UNPITCHED_GM_DRUM.get((step_key, oct_u))
+                if gm is None:
+                    warnings.append(
+                        f"Unsupported unpitched drum position {step_key}/{oct_u}; "
+                        "event omitted (extend _UNPITCHED_GM_DRUM to support)."
+                    )
+                else:
+                    eid = f"evt-drum-{measure_num}-{cursor}"
+                    events.append(
+                        NoteEvent(
+                            event_id=eid,
+                            track_id=part_id,
+                            measure_ref=measure_id,
+                            start_position=cursor,
+                            duration=duration_q,
+                            event_type="note",
+                            midi_pitch=gm,
+                            provenance={
+                                "source": "musicxml",
+                                "measure": str(measure_num),
+                                "kind": "drum_hit",
+                                "display_step": step_key,
+                                "display_octave": oct_u,
+                                "gm_midi": gm,
+                            },
+                        )
+                    )
             else:
                 pitch_el = next((c for c in child if _local(c.tag) == "pitch"), None)
                 step, octave, alter = "C", 4, 0
@@ -166,6 +218,8 @@ def musicxml_to_canonical(
         title = "Untitled"
         warnings.append("Missing work-title; using placeholder title.")
 
+    track_role, instrument_type = _infer_track_role(part_name, saw_unpitched)
+
     ts = TimeSignature(beats_per_measure=beats, beat_unit=beat_type)
     project = CanonicalProject(
         project_id=project_id,
@@ -188,8 +242,8 @@ def musicxml_to_canonical(
             Track(
                 track_id=part_id,
                 track_name=part_name,
-                track_role="unknown",
-                instrument_type="unknown",
+                track_role=track_role,
+                instrument_type=instrument_type,
             )
         ],
         events=events,

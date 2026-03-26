@@ -20,6 +20,10 @@ def map_canonical_to_arrangement(project: CanonicalProject) -> ArrangementPlan:
                 role_hint=t.track_role,
             )
         )
+        if t.track_role == "drums":
+            notes.append(
+                "Drums track: canonical events use GM-style MIDI note numbers per hit; human review required."
+            )
     if not layout:
         notes.append("No tracks in canonical project; empty arrangement plan.")
     return ArrangementPlan(project_title=project.project_title, layout_tracks=layout, notes=notes)

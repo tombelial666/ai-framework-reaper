@@ -23,6 +23,20 @@ def test_imports_smoke() -> None:
     import review  # noqa: F401
 
 
+def test_slice1_drums_fixture_matches_expected_canonical_and_scaffold() -> None:
+    """Drums-first increment: unpitched → GM MIDI hits; scaffold carries drums role + import hints."""
+    fixture = ROOT / "fixtures" / "structured" / "musicxml" / "minimal_drums.xml"
+    exp_c = json.loads((ROOT / "fixtures" / "expected" / "slice1_minimal_drums_canonical.json").read_text(encoding="utf-8"))
+    exp_s = json.loads((ROOT / "fixtures" / "expected" / "slice1_minimal_drums_scaffold.json").read_text(encoding="utf-8"))
+
+    project, bundle, report = run_slice1_musicxml(str(fixture), repo_root=ROOT)
+
+    assert canonical_project_to_dict(project) == exp_c
+    assert scaffold_bundle_to_dict(bundle) == exp_s
+    assert report.summary
+    assert "draft scaffold" in report.summary.lower()
+
+
 def test_slice1_pipeline_matches_expected_canonical_and_scaffold() -> None:
     fixture = ROOT / "fixtures" / "structured" / "musicxml" / "minimal_chord.xml"
     exp_c = json.loads((ROOT / "fixtures" / "expected" / "slice1_minimal_canonical.json").read_text(encoding="utf-8"))

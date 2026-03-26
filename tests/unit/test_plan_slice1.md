@@ -4,13 +4,14 @@
 
 - Guard module boundaries (imports resolve).
 - Lock deterministic output for the minimal MusicXML fixture (`fixtures/structured/musicxml/minimal_chord.xml`).
+- Lock drums-first unpitched fixture (`fixtures/structured/musicxml/minimal_drums.xml`) vs expected canonical/scaffold JSON.
 - Ensure review output reminds that the result is a draft.
 
 ## Current automated tests
 
 | Location | What |
 |----------|------|
-| `tests/unit/test_slice1_contracts.py` | Import smoke; pipeline dict equality vs `fixtures/expected/*.json`; review summary contains draft wording. |
+| `tests/unit/test_slice1_contracts.py` | Import smoke; pipeline dict equality vs `fixtures/expected/*.json` (chord + drums); review summary contains draft wording. |
 
 ## Deferred (not in this slice)
 
