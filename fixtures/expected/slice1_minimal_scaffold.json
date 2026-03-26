@@ -1,0 +1,17 @@
+{
+  "hints": [
+    "Draft scaffold - human review required before treating as performance-ready.",
+    "REAPER is the target editing environment for this bundle."
+  ],
+  "markers": [],
+  "project_title": "Minimal Slice",
+  "tracks": [
+    {
+      "import_notes": "Create track; import MIDI or draw items manually from canonical events.",
+      "name": "Guitar",
+      "role_hint": "unknown",
+      "track_id": "P1"
+    }
+  ],
+  "version": "0.1.0-slice1"
+}

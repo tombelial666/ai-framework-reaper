@@ -15,8 +15,11 @@ ai-framework-reaper/
 │   ├── input/
 │   └── output/
 ├── fixtures/
+│   ├── expected/
 │   ├── screenshot/
 │   └── structured/
+│       └── musicxml/
+├── pyproject.toml
 ├── skills/
 │   ├── docs-maintenance/
 │   ├── music-ingestion/
@@ -28,6 +31,7 @@ ai-framework-reaper/
 │   ├── normalize/
 │   ├── reaper/
 │   ├── review/
+│   ├── slice1_pipeline.py
 │   └── vision/
 ├── tasks/
 ├── templates/
@@ -41,7 +45,7 @@ ai-framework-reaper/
 └── README.md
 ```
 
-Пока в каталогах нет исходных файлов, структура может фиксироваться файлами `.gitkeep`, чтобы дерево в клоне репозитория совпадало с этим документом.
+Пустые или зарезервированные каталоги (например `src/vision/` до реализации screenshot path) могут фиксироваться `.gitkeep`. Код Phase 1 slice 1 живёт в `src/domain/`, `src/ingest/`, `src/normalize/`, `src/mapping/`, `src/reaper/`, `src/review/` и `src/slice1_pipeline.py`.
 
 ## Правила по областям
 

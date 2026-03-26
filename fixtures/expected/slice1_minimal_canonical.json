@@ -1,0 +1,68 @@
+{
+  "events": [
+    {
+      "duration": 1.0,
+      "event_id": "evt-note-1-0.0",
+      "event_type": "note",
+      "measure_ref": "m-1",
+      "midi_pitch": 60,
+      "provenance": {
+        "measure": "1",
+        "source": "musicxml"
+      },
+      "start_position": 0.0,
+      "track_id": "P1"
+    }
+  ],
+  "measures": [
+    {
+      "index": 1,
+      "measure_id": "m-1",
+      "time_signature": {
+        "beat_unit": 4,
+        "beats_per_measure": 4
+      }
+    }
+  ],
+  "processing_metadata": {
+    "notes": [
+      "slice1 minimal MusicXML path"
+    ],
+    "pipeline_version": "0.1.0-slice1"
+  },
+  "project_id": "slice1-minimal",
+  "project_title": "Minimal Slice",
+  "schema": "canonical_project_v0",
+  "sections": [],
+  "source_metadata": {
+    "encoding": "musicxml3-partwise"
+  },
+  "source_references": [
+    {
+      "format": "musicxml",
+      "id": "src-1",
+      "uri_or_label": "fixtures/structured/musicxml/minimal_chord.xml"
+    }
+  ],
+  "tempo_map": [
+    {
+      "at_quarter": 0.0,
+      "beats_per_minute": 120
+    }
+  ],
+  "time_signatures": [
+    {
+      "beat_type": 4,
+      "beats": 4,
+      "measure_ref": "m-1"
+    }
+  ],
+  "tracks": [
+    {
+      "instrument_type": "unknown",
+      "track_id": "P1",
+      "track_name": "Guitar",
+      "track_role": "unknown"
+    }
+  ]
+}

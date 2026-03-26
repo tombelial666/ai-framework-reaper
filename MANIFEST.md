@@ -7,7 +7,7 @@
 - Project name: `REAPER AI Scaffold Framework`
 - Repository role: долгоживущий framework repository
 - Target domain: deterministic AI-assisted preparation of editable music project scaffolds for `REAPER`
-- Current phase: `Phase 0 complete` — next planned: `Phase 1 - MVP Structured Import`
+- Current phase: `Phase 1 - MVP Structured Import` (kickoff: **slice 1** — MusicXML path, см. `docs/phase1-first-slice.md` и ADR-006)
 
 ## 2. Purpose
 
@@ -127,6 +127,7 @@ Layer boundaries описаны в `docs/architecture.md`.
 - mapping plan
 - REAPER-ready editable scaffold
 - minimal review report
+- **Slice 1 (реализуется первой):** один вертикальный путь `MusicXML → canonical → arrangement → REAPER-oriented scaffold bundle (JSON) → review` (детали: `docs/phase1-first-slice.md`, `docs/adr/ADR-006-phase1-first-implementation-slice.md`)
 
 ### Phase 2 - Better Editing Workflow
 

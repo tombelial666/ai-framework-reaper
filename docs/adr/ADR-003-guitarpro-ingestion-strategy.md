@@ -21,3 +21,7 @@ Treat Guitar Pro related structured sources as the preferred MVP ingestion path,
 ## Assumption
 
 - At least one concrete path can provide sufficient deterministic data for MVP.
+
+## Related
+
+- Implementation order for the **first code slice** is recorded in [ADR-006-phase1-first-implementation-slice.md](ADR-006-phase1-first-implementation-slice.md) (MusicXML first; Guitar Pro remains MVP scope for a follow-on slice).

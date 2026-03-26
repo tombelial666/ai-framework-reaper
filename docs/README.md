@@ -34,6 +34,10 @@
 - [documentation-standard.md](documentation-standard.md)
 - [DEVELOPMENT.md](DEVELOPMENT.md)
 
+## Phase 1 slice
+
+- [phase1-first-slice.md](phase1-first-slice.md) — первый вертикальный срез (MusicXML).
+
 ## ADR
 
 - [adr/ADR-001-target-architecture.md](adr/ADR-001-target-architecture.md)
@@ -41,3 +45,4 @@
 - [adr/ADR-003-guitarpro-ingestion-strategy.md](adr/ADR-003-guitarpro-ingestion-strategy.md)
 - [adr/ADR-004-score-normalization-model.md](adr/ADR-004-score-normalization-model.md)
 - [adr/ADR-005-screenshot-to-structure-strategy.md](adr/ADR-005-screenshot-to-structure-strategy.md)
+- [adr/ADR-006-phase1-first-implementation-slice.md](adr/ADR-006-phase1-first-implementation-slice.md)

@@ -2,39 +2,39 @@
 
 ## Goal
 
-Начать **Phase 1 — MVP Structured Import**: зафиксировать первый срез реализации (контракты canonical model, интерфейсы ingestion, минимальный путь до редактируемого REAPER scaffold и review output) без глубокой бизнес-логики сверх выбранного среза.
+Довести **Phase 1 slice 1** до устойчивого минимального вертикального пути: MusicXML → canonical → arrangement → REAPER-oriented JSON scaffold → review, с тестами на фикстуру и без расширения MVP.
 
 ## Confirmed Facts
 
-- Phase 0 foundation complete: `MANIFEST.md`, core `docs/`, ADR pack, Cursor rules/commands, skills, `tasks/_template.md`, каркас `src/` и смежных каталогов согласованы с `docs/STRUCTURE.md`.
-- The repository is framework-first, not a one-off script folder.
-- REAPER is the target DAW and the environment for editing scaffold output.
-- MVP is structured-first, deterministic-first and human-reviewed.
-- Screenshot ingestion is a secondary isolated path.
-- The canonical internal score model is mandatory.
+- **Slice 1** выбран и зафиксирован: **MusicXML (partwise)** как первый structured input; см. `docs/phase1-first-slice.md`, ADR-006.
+- ADR-003 по-прежнему описывает product-приоритет Guitar Pro для MVP; порядок **реализации** (сначала MusicXML) согласован в ADR-006.
+- Контракты и скелет модулей в `src/domain`, `ingest`, `normalize`, `mapping`, `reaper`, `review`; склейка — `src/slice1_pipeline.py`.
+- Фикстура: `fixtures/structured/musicxml/minimal_chord.xml`; ожидаемые формы: `fixtures/expected/slice1_minimal_*.json`.
+- Тесты: `tests/unit/test_slice1_contracts.py`; план: `tests/unit/test_plan_slice1.md`.
+- Python 3.11+, `pyproject.toml` с editable install и optional dev (pytest).
 
 ## Assumptions
 
-- At least one Guitar Pro related source path will be suitable as the preferred structured MVP path.
-- The first REAPER integration cut can be defined without finalizing every transport detail in the first commit.
+- Для slice 1 достаточно stdlib XML и подмножества MusicXML; расширение парсера не ломает границы слоёв.
+- Пользователь дорабатывает черновик в REAPER; JSON bundle не заменяет ручную доработку.
 
 ## Risks
 
-- Implementation may skip manifest/docs alignment and reintroduce drift (mitigation: docs-first, `MANIFEST.md` section 9).
-- REAPER integration choices may pressure upstream architecture if boundaries are not respected.
-- Screenshot path work may expand scope if not kept isolated in `src/vision/`.
+- Расширение MusicXML-парсера может раздуть `normalize/musicxml.py` — держать разбиение на функции и при необходимости вынести в подмодули без утечки в `domain`.
+- Пути к файлам на Windows vs POSIX — в pipeline используется `repo_root` для стабильного `uri_or_label` в canonical.
 
 ## Deferred / Out of Scope
 
-- Full parsers for all formats; audio transcription; audio-first workflows; raw audio parsing; vocal workflow; claims of full automatic accuracy.
-- Choosing and implementing every REAPER artifact option before the first vertical slice works end-to-end.
+- Audio, vocal, screenshot pipeline (`src/vision/`), transcription.
+- Guitar Pro, MIDI, manual tab как **второй** срез после стабилизации slice 1.
+- Полноценный генератор `.rpp` / ReaScript в slice 1.
+- Полное покрытие MusicXML и golden для всех edge cases.
 
 ## Open Questions
 
-- Which exact Guitar Pro related format should be phase-1 primary.
-- Which REAPER-compatible scaffold mechanism should be first-class for slice 1.
-- How strict the manual text/tab-like mini-format should be.
+- Когда подключать второй формат (Guitar Pro vs MIDI) после slice 1.
+- Формат первого «native» REAPER артефакта (`.rpp` vs ReaScript vs только JSON) — после готовности canonical + mapping.
 
 ## Next Decision
 
-Choose the first vertical slice for Phase 1: primary structured input path (one format first) plus first REAPER scaffold artifact strategy, then stub contracts in `src/domain/` and adapters accordingly.
+Выбрать следующий инкремент после зелёных тестов slice 1: **(A)** расширить MusicXML (мультипарт / несколько тактов) **или** **(B)** добавить второй адаптер (например MIDI) по тем же контрактам.
