@@ -1,8 +1,10 @@
 # Data Flow
 
-## Primary Structured-Core Flow
+## Primary Structured-Core Flow (tab-first)
 
-`structured source -> ingestion -> parsed representation -> normalization -> canonical score model -> arrangement mapping -> REAPER integration -> scaffold artifacts + review output`
+`tab/notation structured source -> ingestion (adapters) -> parsed representation -> normalization -> canonical score model -> arrangement mapping -> REAPER integration -> MIDI-oriented scaffold artifacts + review output`
+
+Bridge formats such as **MusicXML** participate as **adapters** into the same canonical path; they are not the product identity.
 
 ## Secondary Screenshot Flow
 
@@ -26,12 +28,12 @@
 ### Mapping Output
 
 - track plan
-- role assignments
+- role assignments (implementation emphasis: **drums → bass → guitar** where applicable)
 - section and layout plan
 
 ### REAPER Output
 
-- editable scaffold artifacts
+- editable **MIDI-oriented** scaffold artifacts (bundles, importable forms; future `.rpp`/script paths per integration strategy)
 - track structure
 - markers and regions where supported
 - traceability metadata

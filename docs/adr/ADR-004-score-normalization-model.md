@@ -6,7 +6,7 @@ Accepted
 
 ## Decision
 
-Adopt a source-agnostic and REAPER-agnostic canonical score model as the mandatory internal representation for MVP and beyond.
+Adopt a source-agnostic and REAPER-agnostic canonical score model as the mandatory internal representation for MVP and beyond. Product-facing sources include tabs/notation ecosystems (Guitar Pro, Songsterr exports where allowed, MIDI, etc.); interchange formats such as **MusicXML** normalize through adapters without becoming the conceptual core.
 
 ## Rationale
 

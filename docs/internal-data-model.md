@@ -10,6 +10,12 @@ Canonical score model обязателен, чтобы:
 
 Детали транспорта (структура файлов Guitar Pro, MIDI bytes, элементы MusicXML, внутренности проекта REAPER) **не** входят в canonical model: они остаются на границах ingestion и export/adapters.
 
+## Product vs bridge formats (canonical stays agnostic)
+
+**Confirmed:** canonical model не различает «продуктовый Guitar Pro» и «технический MusicXML» на уровне полей — различие только в ingestion/adapters и документации. Продукт позиционируется как **tab-first**; MusicXML — типичный **bridge** к canonical representation.
+
+**Порядок реализации downstream (mapping/review):** для MVP ориентир — **drums → bass → guitar** как приоритет глубины и проверяемости, без изменения обязательности полей модели для конкретного инструмента.
+
 ## Model Levels
 
 ### Project-Level Fields

@@ -2,7 +2,7 @@
 
 ## Recommendation
 
-Рекомендация: считать Guitar Pro related structured sources **приоритетным structured path** MVP, но не обещать поддержку деталей, которые не подтверждены конкретным import/export route.
+Рекомендация: считать Guitar Pro related structured sources **приоритетным продуктовым structured path** MVP (tab-first identity), но не обещать поддержку деталей, которые не подтверждены конкретным import/export route.
 
 ## Priority of Paths
 
@@ -14,11 +14,17 @@ Guitar Pro related source в формате, который:
 - даёт track structure, timing и note data;
 - позволяет сохранять provenance and warnings.
 
-### 2. Acceptable Fallback Path
+### 2. Songsterr-Related Structured Path
 
-Conversion/export from Guitar Pro into `MIDI` or `MusicXML`, если fidelity loss явно принимается и помечается warnings.
+**Assumption:** пользователь использует **легально доступные** экспорты/derived structured sources с Songsterr или совместимых сервисов.
 
-### 3. Manual-Assisted Fallback Path
+**Risk:** ToS, лицензирование и доступность экспорта меняются; нарушение правил сервиса недопустимо.
+
+### 3. Acceptable Fallback Path
+
+Conversion/export from Guitar Pro into `MIDI` or `MusicXML` (**bridge**), если fidelity loss явно принимается и помечается warnings.
+
+### 4. Manual-Assisted Fallback Path
 
 Ручная подготовка text/tab-like structure, если structured file unavailable или conversion unreliable.
 
@@ -50,8 +56,8 @@ Conversion/export from Guitar Pro into `MIDI` or `MusicXML`, если fidelity l
 
 ## Confirmed
 
-- Guitar Pro related sources are in MVP.
-- They are expected to be a primary structured path.
+- Guitar Pro related sources are in MVP as **primary product sources** (tab-first).
+- `MusicXML` may be used as a **technical bridge** from Guitar Pro tools without becoming the product headline.
 
 ## Assumption
 
@@ -63,5 +69,6 @@ Conversion/export from Guitar Pro into `MIDI` or `MusicXML`, если fidelity l
 
 ## Open Questions
 
-- Which exact Guitar Pro related format should be first-class in phase 1.
+- Which exact Guitar Pro related format should be first-class in the next slice after the MusicXML bridge.
 - Whether a direct parser or conversion-based route is the best deterministic-first choice.
+- How Songsterr-exported structured inputs will be validated and labeled in ingestion (format detection).

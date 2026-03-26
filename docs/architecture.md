@@ -2,9 +2,14 @@
 
 ## Human-in-the-loop
 
-- **Human-in-the-loop** is mandatory: the system produces a **draft**—editable scaffolds, warnings, unresolved markers, and review-oriented outputs—not final arrangements.
+- **Human-in-the-loop** is mandatory: the system produces a **draft**—editable **MIDI-oriented** scaffolds, warnings, unresolved markers, and review-oriented outputs—not final arrangements or production-ready masters.
 - **REAPER** is the target **editing environment**: the scaffold is meant to be opened and refined there; the pipeline does not replace manual musical decisions.
 - The Review Assistance layer is part of the trust model, not optional polish; it exists so users can verify and correct results.
+
+## Product framing
+
+- **Tab-first:** ingestion is organized around **tab-source adapters** (Guitar Pro ecosystem, Songsterr exports where allowed, MIDI, other notation) and **bridge formats** (e.g. MusicXML) into the canonical model.
+- **Structured-core path** remains primary; screenshot/vision remains secondary and isolated.
 
 ## MVP architectural exclusions (non-goals)
 
@@ -14,9 +19,14 @@ The architecture does **not** target:
 - audio-first workflows;
 - raw audio parsing as a primary path;
 - vocal workflow;
+- lyric workflow;
 - claims of full automatic accuracy.
 
-Additional exclusions (audio-first ingestion, note extraction from raw audio, audio-assisted verification, and related items) are listed in `MANIFEST.md` and `docs/scope.md`.
+Additional exclusions are listed in `MANIFEST.md` and `docs/scope.md`.
+
+## Implementation emphasis (instruments)
+
+For proving value and testability, the recommended **implementation order** is **drums → bass → guitar** (deterministic mapping, easier review, strong early scaffold utility). The canonical model stays source-agnostic; this ordering is about **mapping depth and defaults**, not about demoting guitar as a long-term product source.
 
 ## Recommended Direction
 
@@ -25,7 +35,7 @@ Additional exclusions (audio-first ingestion, note extraction from raw audio, au
 Рационал:
 
 - это держит REAPER-specific logic на краю системы;
-- позволяет добавлять новые structured inputs без переписывания core;
+- позволяет добавлять новые **tab/notation** inputs без переписывания core;
 - не даёт screenshot path диктовать архитектуру всего MVP.
 
 Trade-off:
@@ -42,7 +52,7 @@ Responsibilities:
 
 - detect source type;
 - validate source;
-- route to correct parser;
+- route to correct parser (**tab adapters** + bridge formats);
 - capture source metadata;
 - emit parsed representation and ingestion warnings.
 
@@ -67,7 +77,7 @@ Boundary:
 
 Responsibilities:
 
-- assign track roles;
+- assign track roles (with **drums → bass → guitar** proving order in mind for MVP depth);
 - define track naming;
 - prepare REAPER-oriented project structure;
 - produce mapping plan from canonical model to target layout.
@@ -80,7 +90,7 @@ Boundary:
 
 Responsibilities:
 
-- create editable scaffold;
+- create editable **MIDI-oriented** scaffold;
 - create tracks and importable units;
 - place markers and regions where supported;
 - preserve traceability back to source and canonical fragments.

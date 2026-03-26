@@ -2,7 +2,7 @@
 
 ## Source Ingestion
 
-- Система должна определять тип входного источника.
+- Система должна определять тип входного источника (tab-source adapters: Guitar Pro ecosystem, MIDI, MusicXML bridge, и т.д.).
 - Система должна валидировать пригодность источника для выбранного parser path.
 - Система должна собирать source metadata.
 - Система должна возвращать warnings, если source неполный или неоднозначный.
@@ -16,12 +16,12 @@
 ## Arrangement Mapping
 
 - Система должна строить track planning на основе canonical model.
-- Система должна назначать track names и track roles.
+- Система должна назначать track names и track roles с учётом **приоритета реализации: drums → bass → guitar** там, где это применимо к roadmap.
 - Система должна формировать REAPER-oriented arrangement layout without claiming final interpretation.
 
 ## REAPER Integration
 
-- Система должна выпускать editable REAPER-ready scaffold artifact или набор артефактов (черновик, не финальная аранжировка).
+- Система должна выпускать editable **MIDI-oriented** REAPER-ready scaffold artifact или набор артефактов (черновик: JSON bundle, будущие `.rpp`/импорты MIDI — по интеграционной стратегии).
 - Система должна создавать traceable mapping между source fragments и generated result.
 - Система должна поддерживать markers and regions там, где это practically available.
 
@@ -30,6 +30,10 @@
 - Система должна формировать warnings and unresolved markers.
 - Система должна предоставлять review-oriented output, пригодный для ручной проверки.
 - Система не должна скрывать uncertainty.
+
+## Mode B (Creative Assistance)
+
+- Где поддерживается, выход должен оставаться **scaffold/idea structure**, с явными ограничениями и без обещания финальной композиции (см. `MANIFEST.md`).
 
 ## Screenshot Path
 
