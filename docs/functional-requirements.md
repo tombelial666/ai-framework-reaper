@@ -21,7 +21,7 @@
 
 ## REAPER Integration
 
-- Система должна выпускать editable REAPER-ready scaffold artifact или набор артефактов.
+- Система должна выпускать editable REAPER-ready scaffold artifact или набор артефактов (черновик, не финальная аранжировка).
 - Система должна создавать traceable mapping между source fragments и generated result.
 - Система должна поддерживать markers and regions там, где это practically available.
 

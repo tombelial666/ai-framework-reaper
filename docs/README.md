@@ -1,6 +1,6 @@
 # Документация
 
-Основной index foundation-пакета.
+Основной index foundation-пакета. Канонические границы проекта и фазы: [`MANIFEST.md`](../MANIFEST.md).
 
 ## Product and Scope
 

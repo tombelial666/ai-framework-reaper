@@ -2,7 +2,8 @@
 
 ## Human-in-the-loop
 
-- **Human-in-the-loop** is mandatory: the system produces editable scaffolds, warnings, unresolved markers, and review-oriented outputs—not final arrangements.
+- **Human-in-the-loop** is mandatory: the system produces a **draft**—editable scaffolds, warnings, unresolved markers, and review-oriented outputs—not final arrangements.
+- **REAPER** is the target **editing environment**: the scaffold is meant to be opened and refined there; the pipeline does not replace manual musical decisions.
 - The Review Assistance layer is part of the trust model, not optional polish; it exists so users can verify and correct results.
 
 ## MVP architectural exclusions (non-goals)

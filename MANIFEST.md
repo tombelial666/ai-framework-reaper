@@ -7,7 +7,7 @@
 - Project name: `REAPER AI Scaffold Framework`
 - Repository role: долгоживущий framework repository
 - Target domain: deterministic AI-assisted preparation of editable music project scaffolds for `REAPER`
-- Current phase: `Phase 0 - Discovery / Analyst Pack`
+- Current phase: `Phase 0 complete` — next planned: `Phase 1 - MVP Structured Import`
 
 ## 2. Purpose
 
@@ -16,7 +16,7 @@
 - принимать structured или semi-structured musical source;
 - преобразовывать источник в canonical internal score model;
 - строить arrangement and track plan;
-- выпускать editable REAPER-oriented scaffold;
+- выпускать editable REAPER-oriented scaffold (draft);
 - сопровождать результат warnings, unresolved markers и review-oriented output.
 
 **Human-in-the-loop**: ручная проверка и доработка обязательны; pipeline не заменяет review.
@@ -163,7 +163,8 @@ Layer boundaries описаны в `docs/architecture.md`.
 
 ### Confirmed
 
-- REAPER is the target DAW.
+- Phase 0 foundation (manifest, core `docs/`, ADR pack, Cursor rules/commands, skills, structured tasks, repository layout) is in place.
+- REAPER is the target DAW and the intended environment for editing the scaffold output.
 - MVP is deterministic, structured-first and human-reviewed.
 - Screenshot ingestion is secondary.
 

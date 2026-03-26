@@ -1,5 +1,7 @@
 # Constraints and Assumptions
 
+Авторитетные границы MVP и фаз: [`MANIFEST.md`](../MANIFEST.md) и [`scope.md`](scope.md). Этот документ — краткая сводка ограничений и рабочих допущений; при расхождении приоритет у `MANIFEST.md`.
+
 ## Constraints
 
 ### Confirmed

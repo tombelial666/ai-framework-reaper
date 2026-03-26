@@ -8,6 +8,8 @@ Canonical score model обязателен, чтобы:
 - не привязывать core к REAPER representation;
 - одинаково обрабатывать structured и screenshot-assisted paths.
 
+Детали транспорта (структура файлов Guitar Pro, MIDI bytes, элементы MusicXML, внутренности проекта REAPER) **не** входят в canonical model: они остаются на границах ingestion и export/adapters.
+
 ## Model Levels
 
 ### Project-Level Fields

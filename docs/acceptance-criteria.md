@@ -2,12 +2,13 @@
 
 ## Phase 0 Acceptance
 
-- `README.md` explains purpose, problem, MVP, out-of-scope and repository organization.
+- `README.md` explains purpose, MVP, out-of-scope and repository organization; формулировка проблемы — в `docs/problem-statement.md` (см. ссылки в README).
 - `MANIFEST.md` defines identity, principles, boundaries, phases and alignment rules.
 - Core scope, architecture, canonical model, risks and open questions are captured under `docs/`.
 - ADR set exists for target architecture, REAPER strategy, Guitar Pro strategy, normalization model and screenshot strategy.
 - Cursor memory layers exist as rules, commands and skills.
 - Structured task template exists and current task is captured in `tasks/current-task.md`.
+- Физическое дерево репозитория соответствует `docs/STRUCTURE.md`: каталоги под `src/`, `tests/`, `examples/`, `fixtures/`, `templates/reaper/` присутствуют и отслеживаются в VCS (например через `.gitkeep`), пока нет исходного кода.
 
 ## Validation Thinking for the Framework
 
