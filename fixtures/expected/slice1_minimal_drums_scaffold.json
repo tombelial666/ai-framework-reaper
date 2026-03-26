@@ -1,0 +1,18 @@
+{
+  "hints": [
+    "Draft scaffold - human review required before treating as performance-ready.",
+    "REAPER is the target editing environment for this bundle.",
+    "Drums track: canonical events use GM-style MIDI note numbers per hit; human review required."
+  ],
+  "markers": [],
+  "project_title": "Minimal Drums",
+  "tracks": [
+    {
+      "import_notes": "Create MIDI track; use GM drum map (typically channel 10). Place hits using canonical MIDI note numbers (e.g. 36 kick, 38 snare).",
+      "name": "Drums",
+      "role_hint": "drums",
+      "track_id": "P1"
+    }
+  ],
+  "version": "0.1.0-slice1"
+}

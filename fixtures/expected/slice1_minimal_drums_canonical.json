@@ -1,0 +1,89 @@
+{
+  "events": [
+    {
+      "duration": 1.0,
+      "event_id": "evt-drum-1-0.0",
+      "event_type": "note",
+      "measure_ref": "m-1",
+      "midi_pitch": 36,
+      "provenance": {
+        "display_octave": 4,
+        "display_step": "F",
+        "gm_midi": 36,
+        "kind": "drum_hit",
+        "measure": "1",
+        "source": "musicxml"
+      },
+      "start_position": 0.0,
+      "track_id": "P1"
+    },
+    {
+      "duration": 1.0,
+      "event_id": "evt-drum-1-1.0",
+      "event_type": "note",
+      "measure_ref": "m-1",
+      "midi_pitch": 38,
+      "provenance": {
+        "display_octave": 5,
+        "display_step": "C",
+        "gm_midi": 38,
+        "kind": "drum_hit",
+        "measure": "1",
+        "source": "musicxml"
+      },
+      "start_position": 1.0,
+      "track_id": "P1"
+    }
+  ],
+  "measures": [
+    {
+      "index": 1,
+      "measure_id": "m-1",
+      "time_signature": {
+        "beat_unit": 4,
+        "beats_per_measure": 4
+      }
+    }
+  ],
+  "processing_metadata": {
+    "notes": [
+      "slice1 minimal MusicXML path"
+    ],
+    "pipeline_version": "0.1.0-slice1"
+  },
+  "project_id": "slice1-minimal",
+  "project_title": "Minimal Drums",
+  "schema": "canonical_project_v0",
+  "sections": [],
+  "source_metadata": {
+    "encoding": "musicxml3-partwise"
+  },
+  "source_references": [
+    {
+      "format": "musicxml",
+      "id": "src-1",
+      "uri_or_label": "fixtures/structured/musicxml/minimal_drums.xml"
+    }
+  ],
+  "tempo_map": [
+    {
+      "at_quarter": 0.0,
+      "beats_per_minute": 120
+    }
+  ],
+  "time_signatures": [
+    {
+      "beat_type": 4,
+      "beats": 4,
+      "measure_ref": "m-1"
+    }
+  ],
+  "tracks": [
+    {
+      "instrument_type": "drums",
+      "track_id": "P1",
+      "track_name": "Drums",
+      "track_role": "drums"
+    }
+  ]
+}
